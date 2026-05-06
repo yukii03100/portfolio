@@ -96,7 +96,7 @@ if (lightbox && lightboxImg) {
 }
 window.addEventListener("DOMContentLoaded", () => {
 
-  // ===== 角色卡 =====
+  // ===== 角色牌 =====
   const charImages = [
     "../images/桌遊/角色/1.男性向.png",
     "../images/桌遊/角色/2.女性向.png",
