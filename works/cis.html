@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIS 平面作品 / YU Portfolio</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="cursor-dot"></div>
+
+  <header class="site-header">
+    <a href="../index.html" class="logo">YU / PORTFOLIO</a>
+    <button class="menu-toggle" aria-label="Open menu">Menu</button>
+    <nav class="nav">
+      <a href="../index.html">Home</a>
+      <a href="../works.html">Works</a>
+      <a href="../illustration.html">Illustration</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="project-page page-enter">
+    <a class="back-link" href="../works.html">← Back to Works</a>
+  
+    <section class="project-hero project-hero-grid reveal">
+      <div class="project-title-block">
+        <span>Visual Design / Brand Identity</span>
+        <h1>寄住吧！</h1>
+        <p>Brand Identity Design</p>
+      </div>
+  
+      <div class="project-info-block">
+        <p><strong>Collaborator｜</strong>何珮瑄</p>
+        <p><strong>Type｜</strong>品牌識別設計</p>
+        <p><strong>Output｜</strong>CIS 系統、平面應用、展覽視覺</p>
+      </div>
+    </section>
+  
+    <section class="project-cover reveal">
+      <img src="../images/CIS/mock up01.png" alt="寄住吧 CIS 品牌識別設計">
+    </section>
+  
+    <section class="project-detail project-detail-long reveal">
+      <div>
+        <h2>Project</h2>
+        <p>
+          本專案為品牌識別設計課程成果，以線上展覽形式重新建構品牌視覺系統，
+          並發展完整的 CIS 應用。
+        </p>
+      </div>
+  
+      <div>
+        <h2>Concept</h2>
+        <p>
+          「寄住吧！」以寄居蟹為核心意象。寄居蟹會依環境更換外殼，
+          而品牌在不同設計者手中，也會呈現出多樣的樣貌與詮釋。
+        </p>
+      </div>
+  
+      <div>
+        <h2>Visual</h2>
+        <p>
+          主視覺圍繞「殼＝品牌載體」的概念，將食物、飲料、購物、書籍等元素
+          轉化為不同外殼，象徵品牌在不同情境中的延伸與轉變。
+        </p>
+      </div>
+    </section>
+    <section class="project-logos reveal">
+      <img src="../images/CIS/logo圖.png" alt="Logo 1">
+      <img src="../images/CIS/logo.png" alt="Logo 2">
+      <img src="../images/CIS/資產 8.png" alt="Logo 3">
+    </section>
+
+    <section class="project-slider reveal">
+      <button class="slider-btn left">&#10094;</button>
+    
+      <div class="slider-track" id="sliderTrack">
+        <img src="../images/CIS/brochure mock up04.png">
+        <img src="../images/CIS/mock up06.png">
+        <img src="../images/CIS/mock up04.png">
+        <img src="../images/CIS/mock up07.jpg">
+        <img src="../images/CIS/Image0001.png">
+        <img src="../images/CIS/mock up10.jpg">
+      </div>
+    
+      <button class="slider-btn right">&#10095;</button>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 YU Portfolio</span>
+    <span>Contact / @yuki031.01 / snow.0310.52@gmail.com </span>
+  </footer>
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="../js/main.js"></script>
+<script>  const track = document.getElementById("sliderTrack");
+  const leftBtn = document.querySelector(".slider-btn.left");
+  const rightBtn = document.querySelector(".slider-btn.right");
+  
+  let scrollAmount = 0;
+  
+  rightBtn.addEventListener("click", () => {
+    scrollAmount += 400;
+    track.style.transform = `translateX(-${scrollAmount}px)`;
+  });
+  
+  leftBtn.addEventListener("click", () => {
+    scrollAmount -= 400;
+    if (scrollAmount < 0) scrollAmount = 0;
+    track.style.transform = `translateX(-${scrollAmount}px)`;
+  });</script>
+</body>
+</html>
