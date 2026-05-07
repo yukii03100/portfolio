@@ -98,32 +98,32 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // ===== 角色牌 =====
   const charImages = [
-    "../images/桌遊/角色/1.男性向.png",
-    "../images/桌遊/角色/2.女性向.png",
-    "../images/桌遊/角色/5.福瑞.png",
-    "../images/桌遊/角色/3.原創.png",
-    "../images/桌遊/角色/6.遊戲.png",
-    "../images/桌遊/角色/4.vtuber.png"
+    "../images/boardgame/character/1.png",
+    "../images/boardgame/character/2.png",
+    "../images/boardgame/character/3.png",
+    "../images/boardgame/character/4.png",
+    "../images/boardgame/character/5.png",
+    "../images/boardgame/character/6.png"
   ];
 
   // ===== 正經牌 =====
   const taskImages = [
-    "../images/桌遊/商品宣傳20張/19.png",
-    "../images/桌遊/商品宣傳20張/13.png",
-    "../images/桌遊/商品製作22張/11.png",
-    "../images/桌遊/商品製作22張/15.png",
-    "../images/桌遊/商品繪製26張/19.png",
-    "../images/桌遊/商品繪製26張/9.png"
+    "../images/images/boardgame/card01/19.png",
+    "../images/images/boardgame/card01/5.png",
+    "../images/images/boardgame/card03/5.png",
+    "../images/images/boardgame/card03/9.png",
+    "../images/images/boardgame/card04/19.png",
+    "../images/images/boardgame/card04/9.png"
   ];
 
   // ===== 干擾牌 =====
   const eventImages = [
-    "../images/桌遊/干擾牌/B19X4張.png",
-    "../images/桌遊/干擾牌/B27X5張.png",
-    "../images/桌遊/干擾牌/B30X2張.png",
-    "../images/桌遊/干擾牌/B25X10張.png",
-    "../images/桌遊/干擾牌/B5X1張.png",
-    "../images/桌遊/干擾牌/B31X2張.png"
+    "../images/boardgame/card02/B19.png",
+    "../images/boardgame/card02/B27.png",
+    "../images/boardgame/card02/B30.png",
+    "../images/boardgame/card02/B25.png",
+    "../images/boardgame/card02/B5.png",
+    "../images/boardgame/card02/B31.png"
   ];
 
   const charImg = document.getElementById("charImg");
