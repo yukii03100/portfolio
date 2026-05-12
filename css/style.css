@@ -381,6 +381,11 @@ main {
   background: #dedbd2;
 }
 
+.illustration-section .gallery-item img {
+  object-fit: contain;
+  background: #f8f7f2;
+}
+
 .sub-category {
   margin-top: 48px;
 }
@@ -582,6 +587,15 @@ footer {
   .gallery-grid,
   .gallery-grid.small {
     grid-template-columns: 1fr;
+  }
+
+  .illustration-section .gallery-item {
+    aspect-ratio: auto;
+  }
+
+  .illustration-section .gallery-item img {
+    height: auto;
+    max-height: 82vh;
   }
 
   footer {
@@ -1852,4 +1866,3 @@ footer {
     grid-column: span 1;
   }
 }
-
