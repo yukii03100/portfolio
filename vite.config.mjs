@@ -23,6 +23,12 @@ function htmlInputs() {
     }
   }
 
+  for (const file of readdirSync(resolve(root, "en", "works"))) {
+    if (file.endsWith(".html")) {
+      entries[`en/works/${file.replace(/\.html$/, "")}`] = resolve(root, "en", "works", file);
+    }
+  }
+
   return entries;
 }
 

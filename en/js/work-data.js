@@ -1,3 +1,9 @@
+const nestedWorkPage = window.location.pathname.includes("/en/works/");
+
+function pagePath(path) {
+  return nestedWorkPage && path.startsWith("../") ? `../${path}` : path;
+}
+
 const works = {
   "ocean-of-masks": {
     title: "Ocean of Masks",
@@ -202,16 +208,19 @@ const works = {
 };
 
 function mediaMarkup(src, title) {
+  const resolvedSrc = pagePath(src);
+
   if (/\.(mp4|mov)$/i.test(src)) {
-    return `<video src="${src}" controls muted playsinline></video>`;
+    return `<video src="${resolvedSrc}" controls muted playsinline></video>`;
   }
 
-  return `<img src="${src}" alt="${title}">`;
+  return `<img src="${resolvedSrc}" alt="${title}">`;
 }
 
 function renderWork() {
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id") || "ocean-of-masks";
+  const pageId = window.location.pathname.split("/").pop().replace(/\.html$/, "");
+  const id = params.get("id") || (works[pageId] ? pageId : "ocean-of-masks");
   const work = works[id];
   const root = document.getElementById("work-root");
   const zhLink = document.getElementById("zh-link");
@@ -228,7 +237,7 @@ function renderWork() {
   }
 
   document.title = `${work.title} / YU Portfolio`;
-  zhLink.href = work.original;
+  zhLink.href = pagePath(work.original);
 
   root.insertAdjacentHTML("beforeend", `
     <section class="project-hero reveal">
@@ -274,7 +283,7 @@ function renderWork() {
       </div>
       <div>
         <h2>Link</h2>
-        <p><a class="button" href="${work.original}">View original Chinese page</a></p>
+        <p><a class="button" href="${pagePath(work.original)}">View original Chinese page</a></p>
       </div>
     </section>
   `);
