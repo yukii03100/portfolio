@@ -1,70 +1,75 @@
-const revealItems = document.querySelectorAll('.reveal');
+const revealItems = document.querySelectorAll(".reveal");
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
 
-revealItems.forEach((item) => observer.observe(item));
+  revealItems.forEach((item) => observer.observe(item));
+} else {
+  revealItems.forEach((item) => item.classList.add("is-visible"));
+}
 
-const filterButtons = document.querySelectorAll('.filter-btn');
-const workRows = document.querySelectorAll('.work-row');
+const filterButtons = document.querySelectorAll(".filter-btn");
+const workRows = document.querySelectorAll(".work-row");
 
 filterButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    filterButtons.forEach((btn) => btn.classList.remove('active'));
-    button.classList.add('active');
+  button.addEventListener("click", () => {
+    filterButtons.forEach((btn) => btn.classList.remove("active"));
+    button.classList.add("active");
 
     const filter = button.dataset.filter;
 
     workRows.forEach((row) => {
-      const match = filter === 'all' || row.dataset.category === filter;
-      row.style.display = match ? 'grid' : 'none';
+      const match = filter === "all" || row.dataset.category === filter;
+      row.style.display = match ? "grid" : "none";
 
       if (match) {
         row.animate(
           [
-            { opacity: 0, transform: 'translateY(12px)' },
-            { opacity: 1, transform: 'translateY(0)' }
+            { opacity: 0, transform: "translateY(12px)" },
+            { opacity: 1, transform: "translateY(0)" }
           ],
-          { duration: 360, easing: 'ease-out' }
+          { duration: 360, easing: "ease-out" }
         );
       }
     });
   });
 });
 
-const menuToggle = document.querySelector('.menu-toggle');
-const nav = document.querySelector('.nav');
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav");
 
 if (menuToggle && nav) {
-  menuToggle.addEventListener('click', () => {
-    nav.classList.toggle('open');
+  menuToggle.addEventListener("click", () => {
+    nav.classList.toggle("open");
   });
 }
 
-const cursor = document.querySelector('.cursor-dot');
+const cursor = document.querySelector(".cursor-dot");
 
 if (cursor) {
-  window.addEventListener('mousemove', (event) => {
+  window.addEventListener("mousemove", (event) => {
     cursor.style.left = `${event.clientX}px`;
     cursor.style.top = `${event.clientY}px`;
   });
 }
 
-document.querySelectorAll('a, button, .project-card, .gallery-item').forEach((item) => {
-  item.addEventListener('mouseenter', () => {
-    if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(2.4)';
+document.querySelectorAll("a, button, .project-card, .gallery-item").forEach((item) => {
+  item.addEventListener("mouseenter", () => {
+    if (cursor) cursor.style.transform = "translate(-50%, -50%) scale(2.4)";
   });
 
-  item.addEventListener('mouseleave', () => {
-    if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+  item.addEventListener("mouseleave", () => {
+    if (cursor) cursor.style.transform = "translate(-50%, -50%) scale(1)";
   });
 });
+
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-img");
 const closeBtn = document.querySelector(".lightbox-close");
@@ -74,7 +79,7 @@ if (lightbox && lightboxImg) {
     ".gallery-item img, .project-gallery img, .series-grid img, .project-full img, .project-cover img"
   );
 
-  galleryImages.forEach(img => {
+  galleryImages.forEach((img) => {
     img.addEventListener("click", () => {
       lightbox.classList.add("active");
       lightboxImg.src = img.src;
@@ -88,15 +93,14 @@ if (lightbox && lightboxImg) {
     });
   }
 
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== lightboxImg) {
+  lightbox.addEventListener("click", (event) => {
+    if (event.target !== lightboxImg) {
       lightbox.classList.remove("active");
     }
   });
 }
-window.addEventListener("DOMContentLoaded", () => {
 
-  // ===== 角色牌 =====
+window.addEventListener("DOMContentLoaded", () => {
   const charImages = [
     "../images/boardgame/character/1.png",
     "../images/boardgame/character/2.png",
@@ -106,17 +110,15 @@ window.addEventListener("DOMContentLoaded", () => {
     "../images/boardgame/character/6.png"
   ];
 
-  // ===== 正經牌 =====
   const taskImages = [
-    "../images/images/boardgame/card01/19.png",
-    "../images/images/boardgame/card01/5.png",
-    "../images/images/boardgame/card03/5.png",
-    "../images/images/boardgame/card03/9.png",
-    "../images/images/boardgame/card04/19.png",
-    "../images/images/boardgame/card04/9.png"
+    "../images/boardgame/card01/19.png",
+    "../images/boardgame/card01/5.png",
+    "../images/boardgame/card03/5.png",
+    "../images/boardgame/card03/9.png",
+    "../images/boardgame/card04/19.png",
+    "../images/boardgame/card04/9.png"
   ];
 
-  // ===== 干擾牌 =====
   const eventImages = [
     "../images/boardgame/card02/B19.png",
     "../images/boardgame/card02/B27.png",
@@ -130,7 +132,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const taskImg = document.getElementById("taskImg");
   const eventImg = document.getElementById("eventImg");
 
-  let c = 0, t = 0, e = 0;
+  let c = 0;
+  let t = 0;
+  let e = 0;
 
   setInterval(() => {
     if (charImg) {
@@ -147,23 +151,16 @@ window.addEventListener("DOMContentLoaded", () => {
       e = (e + 1) % eventImages.length;
       eventImg.src = eventImages[e];
     }
-
   }, 2000);
-
 });
 
-// ===== 粒子背景 =====
 window.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("bg-particles");
-  if (!canvas) {
-    console.log("canvas 沒抓到");
-    return;
-  }
+  if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
-
-  let particles = [];
-  const count = 80; // 多一點比較明顯
+  const particles = [];
+  const count = 80;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -173,7 +170,7 @@ window.addEventListener("DOMContentLoaded", () => {
   resize();
   window.addEventListener("resize", resize);
 
-  for (let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i += 1) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
@@ -186,16 +183,16 @@ window.addEventListener("DOMContentLoaded", () => {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
+    particles.forEach((particle) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
 
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+      if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
+      if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
 
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0,0,0,0.15)"; // ← 改成黑色你一定看得到
+      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,0,0,0.15)";
       ctx.fill();
     });
 
@@ -205,11 +202,12 @@ window.addEventListener("DOMContentLoaded", () => {
   draw();
 });
 
-
 const limit = 4;
 
-document.querySelectorAll(".view-more-btn").forEach(btn => {
+document.querySelectorAll(".view-more-btn").forEach((btn) => {
   const grid = btn.previousElementSibling;
+  if (!grid) return;
+
   const items = grid.querySelectorAll(".gallery-item");
 
   if (items.length <= limit) {
@@ -217,7 +215,6 @@ document.querySelectorAll(".view-more-btn").forEach(btn => {
     return;
   }
 
-  // 初始隱藏
   items.forEach((item, index) => {
     if (index >= limit) {
       item.classList.add("is-hidden");
@@ -228,7 +225,7 @@ document.querySelectorAll(".view-more-btn").forEach(btn => {
     const isExpanded = btn.classList.contains("expanded");
 
     if (!isExpanded) {
-      items.forEach(item => item.classList.remove("is-hidden"));
+      items.forEach((item) => item.classList.remove("is-hidden"));
       btn.textContent = "Show Less";
       btn.classList.add("expanded");
     } else {
@@ -239,9 +236,7 @@ document.querySelectorAll(".view-more-btn").forEach(btn => {
       });
       btn.textContent = "View More";
       btn.classList.remove("expanded");
-
       grid.scrollIntoView({ behavior: "smooth" });
     }
   });
 });
-
