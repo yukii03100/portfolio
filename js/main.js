@@ -123,7 +123,7 @@ function enhanceWorksDropdown() {
 
   const allLink = document.createElement("a");
   allLink.href = worksListHref();
-  allLink.textContent = pathInfo().isEnglish ? "All Works" : "全部作品";
+  allLink.textContent = "All Works";
   panel.appendChild(allLink);
 
   workNavItems.forEach(([label, slug]) => {
@@ -135,6 +135,51 @@ function enhanceWorksDropdown() {
 
   wrapper.append(trigger, panel);
   worksLink.replaceWith(wrapper);
+}
+
+function enableWorksDropdownClick() {
+  const dropdowns = document.querySelectorAll(".works-dropdown");
+
+  dropdowns.forEach((dropdown) => {
+    const trigger = dropdown.querySelector(".works-trigger");
+    if (!trigger) return;
+
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      const willOpen = !dropdown.classList.contains("is-open");
+
+      dropdowns.forEach((item) => {
+        item.classList.remove("is-open");
+        item.querySelector(".works-trigger")?.setAttribute("aria-expanded", "false");
+      });
+
+      if (willOpen) {
+        dropdown.classList.add("is-open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".works-dropdown")) return;
+
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove("is-open");
+      dropdown.querySelector(".works-trigger")?.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    dropdowns.forEach((dropdown) => {
+      dropdown.classList.remove("is-open");
+      dropdown.querySelector(".works-trigger")?.setAttribute("aria-expanded", "false");
+    });
+  });
 }
 
 function addPageAssistControls() {
@@ -160,6 +205,7 @@ function addPageAssistControls() {
 }
 
 enhanceWorksDropdown();
+enableWorksDropdownClick();
 addPageAssistControls();
 
 const cursor = document.querySelector(".cursor-dot");

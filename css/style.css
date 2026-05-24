@@ -107,6 +107,7 @@ a {
   left: -18px;
   right: -18px;
   height: 18px;
+  z-index: 1;
 }
 
 .works-trigger::after {
@@ -129,7 +130,7 @@ a {
   position: absolute;
   top: calc(100% + 14px);
   left: 50%;
-  z-index: 100;
+  z-index: 2;
   width: min(74vw, 560px);
   max-height: min(68vh, 520px);
   padding: 14px;
@@ -149,7 +150,8 @@ a {
 }
 
 .works-dropdown:hover .works-dropdown-panel,
-.works-dropdown:focus-within .works-dropdown-panel {
+.works-dropdown:focus-within .works-dropdown-panel,
+.works-dropdown.is-open .works-dropdown-panel {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
