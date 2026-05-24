@@ -51,6 +51,117 @@ if (menuToggle && nav) {
   });
 }
 
+const workNavItems = [
+  ["Ocean of Masks", "ocean-of-masks"],
+  ["Children's Kites", "childrens-kites"],
+  ["Temporary Stay", "cis"],
+  ["Co-creation Project", "co-creation"],
+  ["Doujin Booth Game", "board-game"],
+  ["Invisible Mask", "uiux"],
+  ["Cryptography Game", "cryptography-game"],
+  ["Toilet Launch", "animation"],
+  ["Struggle", "mixed-media"],
+  ["Milkshake Hero", "milkshake"],
+  ["Traces Left Behind", "photograpy"],
+  ["3D & Motion Practice", "archive"],
+  ["Blood Is Not a Sin", "period"],
+  ["Animation Study", "animationstudy"],
+  ["Trace of Being", "trace"],
+  ["Erchong Floodway", "omgvideo"],
+  ["Lahu Projection", "projection"],
+  ["One Finger", "finger"],
+  ["Visual Design Studies", "poster"],
+  ["Visual Identity", "projectvisual"]
+];
+
+function pathInfo() {
+  const path = window.location.pathname.replaceAll("\\", "/");
+  return {
+    isEnglish: document.documentElement.lang.startsWith("en") || path.includes("/en/"),
+    inEnglishWorks: path.includes("/en/works/"),
+    inChineseWorks: path.includes("/works/") && !path.includes("/en/works/")
+  };
+}
+
+function workHref(slug) {
+  const info = pathInfo();
+
+  if (info.inEnglishWorks) return `${slug}.html`;
+  if (info.isEnglish) return `works/${slug}.html`;
+  if (info.inChineseWorks) return `${slug}.html`;
+  return `works/${slug}.html`;
+}
+
+function worksListHref() {
+  const info = pathInfo();
+
+  if (info.inEnglishWorks) return "../works.html";
+  if (info.isEnglish) return "works.html";
+  if (info.inChineseWorks) return "../works.html";
+  return "works.html";
+}
+
+function enhanceWorksDropdown() {
+  if (!nav || nav.querySelector(".works-dropdown")) return;
+
+  const worksLink = Array.from(nav.querySelectorAll("a")).find((link) => {
+    const href = link.getAttribute("href") || "";
+    return /(^|\/|\.\.\/)works\.html$/.test(href);
+  });
+
+  if (!worksLink) return;
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "nav-item works-dropdown";
+
+  const trigger = worksLink.cloneNode(true);
+  trigger.classList.add("works-trigger");
+  trigger.setAttribute("aria-haspopup", "true");
+
+  const panel = document.createElement("div");
+  panel.className = "works-dropdown-panel";
+
+  const allLink = document.createElement("a");
+  allLink.href = worksListHref();
+  allLink.textContent = pathInfo().isEnglish ? "All Works" : "全部作品";
+  panel.appendChild(allLink);
+
+  workNavItems.forEach(([label, slug]) => {
+    const item = document.createElement("a");
+    item.href = workHref(slug);
+    item.textContent = label;
+    panel.appendChild(item);
+  });
+
+  wrapper.append(trigger, panel);
+  worksLink.replaceWith(wrapper);
+}
+
+function addPageAssistControls() {
+  const projectPage = document.querySelector(".project-page");
+  if (!projectPage || document.querySelector(".page-assist")) return;
+
+  const controls = document.createElement("div");
+  controls.className = "page-assist";
+
+  const works = document.createElement("a");
+  works.href = worksListHref();
+  works.textContent = "Works";
+
+  const top = document.createElement("button");
+  top.type = "button";
+  top.textContent = "Top";
+  top.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  controls.append(works, top);
+  document.body.appendChild(controls);
+}
+
+enhanceWorksDropdown();
+addPageAssistControls();
+
 const cursor = document.querySelector(".cursor-dot");
 
 if (cursor) {
