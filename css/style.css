@@ -95,6 +95,20 @@ a {
   position: relative;
 }
 
+.works-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.works-dropdown::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  right: -18px;
+  height: 18px;
+}
+
 .works-trigger::after {
   content: "";
   display: inline-block;
@@ -115,6 +129,7 @@ a {
   position: absolute;
   top: calc(100% + 14px);
   left: 50%;
+  z-index: 100;
   width: min(74vw, 560px);
   max-height: min(68vh, 520px);
   padding: 14px;
