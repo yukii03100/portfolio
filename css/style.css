@@ -781,7 +781,9 @@ footer {
   .page-head h1,
   .about-layout h1,
   .project-hero h1 {
-    font-size: clamp(3.2rem, 18vw, 5rem);
+    font-size: 3.2rem;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
   }
 
   .gallery-grid,
@@ -1008,6 +1010,14 @@ footer {
   .project-info,
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .project-page > .project-info {
+    grid-template-columns: 1fr;
+  }
+
+  .project-page > .project-info p {
+    overflow-wrap: anywhere;
   }
 
   .process-flow {
