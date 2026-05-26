@@ -51,27 +51,47 @@ if (menuToggle && nav) {
   });
 }
 
-const workNavItems = [
-  ["Ocean of Masks", "ocean-of-masks"],
-  ["Children's Kites", "childrens-kites"],
-  ["Temporary Stay", "cis"],
-  ["Co-creation Project", "co-creation"],
-  ["Doujin Booth Game", "board-game"],
-  ["Invisible Mask", "uiux"],
-  ["Cryptography Game", "cryptography-game"],
-  ["Toilet Launch", "animation"],
-  ["Struggle", "mixed-media"],
-  ["Milkshake Hero", "milkshake"],
-  ["Traces Left Behind", "photograpy"],
-  ["3D & Motion Practice", "archive"],
-  ["Blood Is Not a Sin", "period"],
-  ["Animation Study", "animationstudy"],
-  ["Trace of Being", "trace"],
-  ["Erchong Floodway", "omgvideo"],
-  ["Lahu Projection", "projection"],
-  ["One Finger", "finger"],
-  ["Visual Design Studies", "poster"],
-  ["Visual Identity", "projectvisual"]
+const workNavGroups = [
+  {
+    title: "Visual Design",
+    items: [
+      ["Ocean of Masks", "ocean-of-masks"],
+      ["Children's Kites", "childrens-kites"],
+      ["Temporary Stay", "cis"],
+      ["Co-creation Project", "co-creation"],
+      ["Traces Left Behind", "photograpy"],
+      ["Blood Is Not a Sin", "period"],
+      ["One Finger", "finger"],
+      ["Visual Design Studies", "poster"],
+      ["Visual Identity", "projectvisual"]
+    ]
+  },
+  {
+    title: "Interactive & Game",
+    items: [
+      ["Doujin Booth Game", "board-game"],
+      ["Invisible Mask", "uiux"],
+      ["Cryptography Game", "cryptography-game"],
+      ["Trace of Being", "trace"],
+      ["Lahu Projection", "projection"]
+    ]
+  },
+  {
+    title: "Motion & Spatial",
+    items: [
+      ["Toilet Launch", "animation"],
+      ["Animation Study", "animationstudy"],
+      ["Erchong Floodway", "omgvideo"]
+    ]
+  },
+  {
+    title: "Archive",
+    items: [
+      ["Struggle", "mixed-media"],
+      ["Milkshake Hero", "milkshake"],
+      ["3D & Motion Practice", "archive"]
+    ]
+  }
 ];
 
 function pathInfo() {
@@ -123,14 +143,27 @@ function enhanceWorksDropdown() {
 
   const allLink = document.createElement("a");
   allLink.href = worksListHref();
+  allLink.className = "works-all-link";
   allLink.textContent = "All Works";
   panel.appendChild(allLink);
 
-  workNavItems.forEach(([label, slug]) => {
-    const item = document.createElement("a");
-    item.href = workHref(slug);
-    item.textContent = label;
-    panel.appendChild(item);
+  workNavGroups.forEach((group) => {
+    const groupEl = document.createElement("div");
+    groupEl.className = "works-menu-group";
+
+    const heading = document.createElement("span");
+    heading.className = "works-menu-heading";
+    heading.textContent = group.title;
+    groupEl.appendChild(heading);
+
+    group.items.forEach(([label, slug]) => {
+      const item = document.createElement("a");
+      item.href = workHref(slug);
+      item.textContent = label;
+      groupEl.appendChild(item);
+    });
+
+    panel.appendChild(groupEl);
   });
 
   wrapper.append(trigger, panel);
