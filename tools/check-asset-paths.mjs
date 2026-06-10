@@ -37,6 +37,7 @@ for (const file of sourceFiles) {
 
     if (
       !url ||
+      url.includes("${") ||
       url.startsWith("http") ||
       url.startsWith("#") ||
       url.startsWith("mailto:") ||
