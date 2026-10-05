@@ -3871,3 +3871,81 @@ body.series-viewer-open { overflow: hidden; }
   .listen-screen-grid{grid-template-columns:1fr}.listen-screen-grid img:last-child{grid-column:1;aspect-ratio:auto}.listen-screen-grid img{min-height:220px}.listen-identity{padding:32px 18px}.listen-identity-grid{grid-template-columns:1fr;grid-template-rows:auto}.listen-identity-grid .listen-poster{grid-row:auto}.listen-identity-grid img{min-height:240px}
   .home-manifesto{grid-template-columns:1fr;margin:60px 0 100px;padding:54px 0}.home-manifesto h2{font-size:2.9rem}.home-manifesto-note{grid-column:1;grid-template-columns:1fr;gap:14px}
 }
+
+/* About / resume */
+.about-page { padding-bottom: 80px; }
+.about-intro h2 { max-width: 680px; margin: 22px 0; color: #665f91; font-size: clamp(1.8rem,3vw,3.4rem); line-height: 1.16; letter-spacing: -.035em; }
+.about-intro p { max-width: 760px; }
+.resume-block { margin-top: 110px; padding-top: 76px; border-top: 2px solid #665f5a; }
+.resume-heading { display: grid; grid-template-columns: .3fr 1fr; gap: 28px; margin-bottom: 44px; }
+.resume-heading span,.resume-card>span { color: #8077a6; font-size: .68rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+.resume-heading h2 { margin: 0; color: #5d5651; font-size: clamp(3rem,6vw,6.2rem); line-height: .95; letter-spacing: -.055em; }
+.resume-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.resume-card { padding: clamp(26px,3.5vw,46px); border: 2px solid #665f5a; border-radius: 24px; background: #fffaf2; box-shadow: 7px 7px 0 var(--lavender); }
+.resume-card:nth-child(2) { background: #fbe8ed; box-shadow-color: var(--pink); }
+.resume-card:nth-child(3) { background: #eef6ed; box-shadow-color: var(--mint); }
+.resume-card-wide { grid-column: 1 / -1; }
+.resume-entry { display: flex; justify-content: space-between; gap: 28px; margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(102,95,90,.35); }
+.resume-entry h3,.resume-columns h3 { margin: 0 0 8px; font-size: 1.05rem; }
+.resume-entry p,.resume-columns p { margin: 0; color: var(--sub); font-size: .82rem; }
+.resume-entry time { flex: 0 0 auto; color: #8c817a; font-size: .72rem; }
+.resume-card ul { margin: 28px 0 0; padding-left: 1.1rem; }
+.resume-card li { margin: 0 0 14px; color: #625b56; line-height: 1.65; }
+.resume-columns { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 28px; }
+.resume-columns>div { padding: 20px; border: 1px solid rgba(102,95,90,.34); border-radius: 15px; background: rgba(255,255,255,.5); }
+
+/* Blood Is Not a Sin case study */
+.blood-page { --blood:#a91520; --blood-pale:#f4e7e6; --blood-black:#171314; }
+.blood-case { overflow: clip; }
+.blood-hero { display: grid; grid-template-columns: .78fr 1.22fr; gap: clamp(34px,5vw,76px); align-items: center; min-height: 78svh; margin-top: 34px; padding: clamp(34px,5vw,74px); border: 2px solid #665f5a; border-radius: 32px; background: #f4f0ee; box-shadow: 12px 12px 0 #d9c7c6; }
+.blood-hero-copy>span,.blood-section-head>span,.blood-statement>span { color: var(--blood); font-size: .68rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+.blood-hero h1 { margin: 28px 0 24px; color: var(--blood-black); font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3.8rem,7vw,7.8rem); font-weight: 500; line-height: .82; letter-spacing: -.065em; }
+.blood-hero h1 em { color: var(--blood); font-style: normal; }
+.blood-hero p { max-width: 620px; color: #655c59; line-height: 1.9; }
+.blood-award { display: inline-flex; margin-top: 24px; padding: 9px 13px; border: 1px solid #7f6765; border-radius: 999px; color: #7d5655; font-size: .72rem; font-weight: 800; }
+.blood-hero-image { height: min(68vh,730px); min-height: 520px; margin: 0; overflow: hidden; border: 2px solid #665f5a; border-radius: 24px; background: #d9d3cf; box-shadow: 9px 9px 0 var(--blood); }
+.blood-hero-image img { width: 100%; height: 100%; object-fit: cover; }
+.blood-meta { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; padding: 70px 0; }
+.blood-meta>div { padding: 22px; border: 1.5px solid #665f5a; border-radius: 16px; background: #fffaf2; }
+.blood-meta small { display: block; margin-bottom: 14px; color: #9a7773; font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.blood-meta strong { display: block; color: #5d5350; font-size: .92rem; line-height: 1.5; }
+.blood-statement { margin: 45px 0 120px; padding: clamp(50px,8vw,110px); border-radius: 32px; background: var(--blood-black); color: #fff; }
+.blood-statement h2 { max-width: 1120px; margin: 26px 0 38px; color: #fff2ef; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem,6.4vw,7rem); font-weight: 500; line-height: 1.02; letter-spacing: -.055em; }
+.blood-statement p { max-width: 760px; margin-left: auto; color: #d6cac7; font-size: 1rem; line-height: 1.95; }
+.blood-section-head { display: grid; grid-template-columns: .32fr 1fr; gap: 30px; align-items: start; margin-bottom: 38px; }
+.blood-section-head h2 { margin: 0 0 20px; color: #3f3836; font-size: clamp(2.5rem,5vw,5.4rem); line-height: .98; letter-spacing: -.05em; }
+.blood-section-head p { max-width: 780px; color: #746b67; line-height: 1.85; }
+.blood-object,.blood-video,.blood-digital,.blood-exhibition { margin: 120px 0; }
+.blood-object-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+.blood-object-grid figure { margin: 0; overflow: hidden; border: 2px solid #665f5a; border-radius: 20px; background: #fff; }
+.blood-object-grid img { width: 100%; aspect-ratio: 1 / 1.08; object-fit: contain; }
+.blood-object-grid figcaption { padding: 13px 16px; border-top: 1px solid #bcb0aa; color: #837873; font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.blood-video video { display: block; width: 100%; border: 2px solid #665f5a; border-radius: 26px; background: #000; box-shadow: 10px 10px 0 #d9c7c6; }
+.blood-flow { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin: 80px 0 130px; }
+.blood-flow article { min-height: 230px; padding: 26px; border: 2px solid #665f5a; border-radius: 20px; background: #fffaf2; }
+.blood-flow article:nth-child(2),.blood-flow article:nth-child(4) { background: var(--blood-pale); }
+.blood-flow b { color: var(--blood); font-size: .7rem; }
+.blood-flow h3 { margin: 52px 0 14px; font-size: 1.35rem; }
+.blood-flow p { color: #776e69; font-size: .88rem; line-height: 1.7; }
+.blood-phone-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 14px; padding: 34px; border-radius: 28px; background: var(--blood-black); }
+.blood-phone-grid img { width: 100%; height: 100%; max-height: 540px; object-fit: contain; }
+.blood-experience-image { display: grid; grid-template-columns: 1.3fr .7fr; margin: 22px 0 0; overflow: hidden; border: 2px solid #665f5a; border-radius: 22px; background: #1b1716; }
+.blood-experience-image img { width: 100%; height: 100%; max-height: 680px; object-fit: cover; }
+.blood-experience-image figcaption { display: grid; place-items: center; padding: 42px; color: #fff1ee; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2rem,4vw,4.8rem); line-height: 1.08; }
+.blood-exhibition-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.blood-exhibition-grid img { width: 100%; border: 2px solid #665f5a; border-radius: 20px; background: #eee; }
+.blood-exhibition-grid img:first-child { grid-row: 1 / 3; height: 100%; object-fit: cover; }
+.blood-feature .thumb img { object-position: center 35%; }
+
+@media(max-width:900px){
+  .resume-heading,.blood-section-head { grid-template-columns: 1fr; }
+  .resume-grid { grid-template-columns: 1fr; }.resume-card-wide { grid-column: 1; }.resume-columns { grid-template-columns: 1fr; }
+  .blood-hero { grid-template-columns: 1fr; }.blood-hero-image { height: 68vw; min-height: 430px; }.blood-meta { grid-template-columns: 1fr 1fr; }
+  .blood-object-grid,.blood-flow { grid-template-columns: 1fr 1fr; }.blood-phone-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media(max-width:600px){
+  .resume-block { margin-top: 70px; }.resume-heading h2 { font-size: 3rem; }.resume-entry { display: block; }.resume-entry time { display: block; margin-top: 10px; }
+  .blood-hero { padding: 34px 22px; border-radius: 22px; }.blood-hero h1 { font-size: 4rem; }.blood-hero-image { height: 95vw; min-height: 360px; }
+  .blood-meta,.blood-object-grid,.blood-flow { grid-template-columns: 1fr; }.blood-statement { padding: 44px 23px; }.blood-statement h2 { font-size: 2.8rem; }.blood-statement p { margin-left: 0; }
+  .blood-phone-grid { grid-template-columns: 1fr 1fr; padding: 14px; }.blood-experience-image,.blood-exhibition-grid { grid-template-columns: 1fr; }.blood-experience-image figcaption { padding: 32px 24px; }.blood-exhibition-grid img:first-child { grid-row: auto; }
+}
