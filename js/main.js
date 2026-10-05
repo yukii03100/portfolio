@@ -48,10 +48,246 @@ const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
 if (menuToggle && nav) {
+  menuToggle.setAttribute("aria-expanded", "false");
   menuToggle.addEventListener("click", () => {
     nav.classList.toggle("open");
+    const open = nav.classList.contains("open");
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.textContent = open ? "Close" : "Menu";
   });
 }
+
+const currentFile = window.location.pathname.split("/").pop() || "index.html";
+document.querySelectorAll(".nav > a").forEach((link) => {
+  const linkFile = (link.getAttribute("href") || "").split("/").pop();
+  if (linkFile === currentFile && linkFile !== "") link.setAttribute("aria-current", "page");
+});
+
+function renderIllustrationLibrary() {
+  const library = window.ILLUSTRATION_LIBRARY;
+  if (!library) return;
+  const illustrationAssetHref = (path) => pathInfo().isEnglish ? `../${path}` : path;
+
+  const viewer = document.createElement("div");
+  viewer.className = "series-viewer";
+  viewer.hidden = true;
+  viewer.setAttribute("role", "dialog");
+  viewer.setAttribute("aria-modal", "true");
+  viewer.setAttribute("aria-label", "Illustration series viewer");
+  viewer.innerHTML = `
+    <div class="series-viewer-dialog">
+      <header class="series-viewer-header">
+        <div><small>Illustration series</small><h3></h3></div>
+        <button class="series-viewer-close" type="button" aria-label="Close series">×</button>
+      </header>
+      <div class="series-viewer-stage">
+        <button class="series-viewer-prev" type="button" aria-label="Previous image">←</button>
+        <img class="series-viewer-image" src="" alt="">
+        <button class="series-viewer-next" type="button" aria-label="Next image">→</button>
+      </div>
+      <div class="series-viewer-meta"><span></span><strong></strong></div>
+      <div class="series-viewer-thumbs" aria-label="Choose an image"></div>
+    </div>`;
+  document.body.appendChild(viewer);
+
+  const viewerTitle = viewer.querySelector("h3");
+  const viewerImage = viewer.querySelector(".series-viewer-image");
+  const viewerCounter = viewer.querySelector(".series-viewer-meta span");
+  const viewerFilename = viewer.querySelector(".series-viewer-meta strong");
+  const viewerThumbs = viewer.querySelector(".series-viewer-thumbs");
+  let activeGroup = null;
+  let activeIndex = 0;
+
+  const showImage = (index) => {
+    if (!activeGroup) return;
+    activeIndex = (index + activeGroup.images.length) % activeGroup.images.length;
+    const path = activeGroup.images[activeIndex];
+    viewerImage.src = encodeURI(illustrationAssetHref(path));
+    viewerImage.alt = `${activeGroup.title} ${activeIndex + 1}`;
+    viewerCounter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(activeGroup.images.length).padStart(2, "0")}`;
+    viewerFilename.textContent = path.split("/").pop();
+    viewerThumbs.querySelectorAll("button").forEach((thumb, thumbIndex) => {
+      thumb.classList.toggle("is-active", thumbIndex === activeIndex);
+      if (thumbIndex === activeIndex) thumb.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    });
+  };
+
+  const closeViewer = () => {
+    viewer.hidden = true;
+    document.body.classList.remove("series-viewer-open");
+  };
+
+  const openViewer = (group) => {
+    activeGroup = group;
+    viewer.classList.toggle("is-single", group.images.length === 1);
+    viewerTitle.textContent = group.title.replaceAll(" / ", " · ");
+    viewerThumbs.replaceChildren();
+    group.images.forEach((path, index) => {
+      const thumb = document.createElement("button");
+      thumb.type = "button";
+      thumb.setAttribute("aria-label", `View image ${index + 1}`);
+      const image = document.createElement("img");
+      image.src = encodeURI(illustrationAssetHref(path));
+      image.alt = "";
+      image.loading = "lazy";
+      thumb.appendChild(image);
+      thumb.addEventListener("click", () => showImage(index));
+      viewerThumbs.appendChild(thumb);
+    });
+    viewer.hidden = false;
+    document.body.classList.add("series-viewer-open");
+    showImage(0);
+    viewer.querySelector(".series-viewer-close").focus();
+  };
+
+  viewer.querySelector(".series-viewer-close").addEventListener("click", closeViewer);
+  viewer.querySelector(".series-viewer-prev").addEventListener("click", () => showImage(activeIndex - 1));
+  viewer.querySelector(".series-viewer-next").addEventListener("click", () => showImage(activeIndex + 1));
+  viewer.addEventListener("click", (event) => { if (event.target === viewer) closeViewer(); });
+  document.addEventListener("keydown", (event) => {
+    if (viewer.hidden) return;
+    if (event.key === "Escape") closeViewer();
+    if (event.key === "ArrowLeft") showImage(activeIndex - 1);
+    if (event.key === "ArrowRight") showImage(activeIndex + 1);
+  });
+
+  document.querySelectorAll("[data-illustration-key]").forEach((category) => {
+    const key = category.dataset.illustrationKey;
+    const series = library[key] || [];
+    const mount = category.querySelector(".series-library");
+    if (!mount) return;
+
+    series.forEach((group, groupIndex) => {
+      const article = document.createElement("article");
+      article.className = "series-card";
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "series-card-trigger";
+      button.setAttribute("aria-haspopup", "dialog");
+
+      const cover = document.createElement("span");
+      cover.className = "series-card-cover";
+      const coverImage = document.createElement("img");
+      coverImage.src = encodeURI(illustrationAssetHref(group.images[0]));
+      coverImage.alt = `${group.title} series cover`;
+      coverImage.loading = "lazy";
+      cover.appendChild(coverImage);
+
+      const info = document.createElement("span");
+      info.className = "series-card-info";
+      const number = document.createElement("small");
+      number.textContent = String(groupIndex + 1).padStart(2, "0");
+      const title = document.createElement("strong");
+      title.textContent = group.title.replaceAll(" / ", " · ");
+      const count = document.createElement("em");
+      count.textContent = group.images.length === 1 ? "Single work  ↗" : `${group.images.length} works  +`;
+      info.append(number, title, count);
+      button.append(cover, info);
+
+      button.addEventListener("click", () => openViewer(group));
+
+      article.appendChild(button);
+      mount.appendChild(article);
+    });
+  });
+}
+
+renderIllustrationLibrary();
+
+function setupIllustrationCategories() {
+  const categories = Array.from(document.querySelectorAll(".sub-category"));
+  const pageHead = document.querySelector(".page-head");
+  if (!pageHead || categories.length < 2) return;
+
+  const categoryNav = document.createElement("section");
+  categoryNav.className = "illustration-category-nav reveal is-visible";
+  categoryNav.setAttribute("aria-label", "Illustration categories");
+
+  const intro = document.createElement("div");
+  intro.className = "illustration-category-intro";
+  intro.innerHTML = "<span>Browse by category</span><p>Choose a collection to explore.</p>";
+
+  const buttons = document.createElement("div");
+  buttons.className = "illustration-category-buttons";
+  buttons.setAttribute("role", "tablist");
+  let isInitializing = true;
+
+  categories.forEach((category, index) => {
+    const heading = category.querySelector("h2");
+    const title = heading?.textContent.trim() || `Category ${index + 1}`;
+    const slug = title.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const itemCount = (window.ILLUSTRATION_LIBRARY?.[category.dataset.illustrationKey] || [])
+      .reduce((total, group) => total + group.images.length, 0);
+
+    category.id = `illustration-${slug}`;
+    category.classList.add("illustration-category-panel");
+    category.setAttribute("role", "tabpanel");
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "illustration-category-button";
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", category.id);
+    button.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span><strong>${title}</strong><small>${itemCount} works</small>`;
+
+    button.addEventListener("click", () => {
+      categories.forEach((panel) => {
+        panel.hidden = panel !== category;
+        panel.classList.toggle("is-active", panel === category);
+      });
+      buttons.querySelectorAll("button").forEach((tab) => {
+        const active = tab === button;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      if (!isInitializing) history.replaceState(null, "", `#${category.id}`);
+    });
+
+    buttons.appendChild(button);
+  });
+
+  intro.appendChild(buttons);
+  categoryNav.appendChild(intro);
+  pageHead.insertAdjacentElement("afterend", categoryNav);
+
+  const requested = categories.find((category) => `#${category.id}` === window.location.hash);
+  const initial = requested || categories[0];
+  const initialButton = buttons.querySelector(`[aria-controls="${initial.id}"]`);
+  initialButton?.click();
+  isInitializing = false;
+}
+
+setupIllustrationCategories();
+
+function addLinkedInLinks() {
+  const linkedInUrl = "https://www.linkedin.com/in/shuyu-chou-3b863b25a/?isSelfProfile=true";
+
+  document.querySelectorAll("footer").forEach((footer) => {
+    if (footer.querySelector(".footer-linkedin")) return;
+    const link = document.createElement("a");
+    link.className = "footer-linkedin";
+    link.href = linkedInUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "LinkedIn ↗";
+    footer.appendChild(link);
+  });
+
+  const toolTags = document.querySelector(".about-layout .tool-tags");
+  if (toolTags && !document.querySelector(".about-linkedin")) {
+    const link = document.createElement("a");
+    link.className = "about-linkedin";
+    link.href = linkedInUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerHTML = "<span>Connect on LinkedIn</span><b>↗</b>";
+    toolTags.insertAdjacentElement("afterend", link);
+  }
+}
+
+addLinkedInLinks();
 
 const workNavGroups = [
   {
