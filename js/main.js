@@ -58,6 +58,20 @@ if (menuToggle && nav) {
 }
 
 const currentFile = window.location.pathname.split("/").pop() || "index.html";
+
+// Keep the newest case study available in every repeated Works dropdown.
+document.querySelectorAll(".works-menu-group").forEach((group) => {
+  const heading = group.querySelector(".works-menu-heading");
+  if (!heading || heading.textContent.trim() !== "Interactive & Game" || group.querySelector('[href*="listen-speak"]')) return;
+  const path = window.location.pathname;
+  const isEnglish = path.includes("/en/");
+  const inWorkFolder = path.includes("/works/");
+  const href = inWorkFolder ? "listen-speak.html" : "works/listen-speak.html";
+  const link = document.createElement("a");
+  link.href = href;
+  link.textContent = isEnglish ? "Listen & Speak" : "聽說 Listen & Speak";
+  heading.insertAdjacentElement("afterend", link);
+});
 document.querySelectorAll(".nav > a").forEach((link) => {
   const linkFile = (link.getAttribute("href") || "").split("/").pop();
   if (linkFile === currentFile && linkFile !== "") link.setAttribute("aria-current", "page");
