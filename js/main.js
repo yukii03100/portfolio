@@ -168,11 +168,20 @@ function renderIllustrationLibrary() {
 
       const cover = document.createElement("span");
       cover.className = "series-card-cover";
-      const coverImage = document.createElement("img");
-      coverImage.src = encodeURI(illustrationAssetHref(group.images[0]));
-      coverImage.alt = `${group.title} series cover`;
-      coverImage.loading = "lazy";
-      cover.appendChild(coverImage);
+      cover.classList.add(group.images.length === 1 ? "is-single" : "is-series");
+      group.images.slice(0, group.images.length === 1 ? 1 : 3).forEach((image, imageIndex) => {
+        const coverImage = document.createElement("img");
+        coverImage.src = encodeURI(illustrationAssetHref(image));
+        coverImage.alt = imageIndex === 0 ? `${group.title} cover` : "";
+        coverImage.loading = "lazy";
+        cover.appendChild(coverImage);
+      });
+      if (group.images.length > 1) {
+        const stackBadge = document.createElement("span");
+        stackBadge.className = "series-card-stack-badge";
+        stackBadge.textContent = `＋${group.images.length}`;
+        cover.appendChild(stackBadge);
+      }
 
       const info = document.createElement("span");
       info.className = "series-card-info";
