@@ -6,9 +6,12 @@
   <title>YU Portfolio</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="home-page">
     <canvas id="bg-particles"></canvas>
     <div class="cursor-dot"></div>
+  <div class="home-intro" aria-hidden="true">
+    <div class="home-intro-name"><span>YUKI</span><span>CHOU</span></div>
+  </div>
   <header class="site-header">
     <a href="index.html" class="logo">YU / PORTFOLIO</a>
     <button class="menu-toggle" aria-label="Open menu">Menu</button>
@@ -59,93 +62,66 @@
   </header>
 
   <main>
-    <section class="hero page-enter">
-      <div class="hero-copy">
-        <div class="hero-kicker">Concept-driven cross-media designer</div>
-        <h1>Yuki<br><span>Chou</span></h1>
-        <p>我從觀眾怎麼理解、操作與參與開始思考，再把抽象的議題轉譯成可以被看見的視覺、互動與空間體驗。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="works.html">View Works</a>
-          <a class="button" href="about.html">About Me</a>
-        </div>
-      </div>
-      <div class="hero-showcase" aria-label="Selected projects">
-        <a class="hero-work hero-work-main" href="works/listen-speak.html">
-          <img src="images/listen-speak/experience.png" alt="聽說 Listen and Speak">
-          <span><b>聽說 Listen & Speak</b><small>Interactive / 2025</small></span>
-        </a>
-        <a class="hero-work" href="works/uiux.html">
-          <img src="images/invisablemask/cover.jpg" alt="Invisible Mask">
-          <span><b>Invisible Mask</b><small>UX / Future Scenario</small></span>
-        </a>
-        <a class="hero-work" href="works/ocean-of-masks.html">
-          <img src="images/visual/maskjellyfish.png" alt="Ocean of Masks">
-          <span><b>Ocean of Masks</b><small>Poster</small></span>
-        </a>
+    <section class="hero home-hero page-enter" aria-labelledby="home-title">
+      <div class="home-hero-top"><span>PORTFOLIO / 2026</span><span>VISUAL · MOTION · INTERACTION</span></div>
+      <h1 class="home-name" id="home-title"><span>YUKI</span><span>CHOU</span></h1>
+      <div class="home-hero-statement">
+        <p class="hero-belief">想做，那就去學，<br>讓自己做得到。</p>
+        <p class="hero-intro">畫圖、動畫、設計與互動。這裡收錄了我一路想做，也真的做出來的作品。</p>
+        <a class="hero-scroll" href="#selected">往下看精選作品 <span>↓</span></a>
       </div>
     </section>
 
-    <section class="home-manifesto reveal">
-      <span>How I work</span>
-      <h2>我把抽象的議題，<br>變成可以被看見、被理解，<br>也能親自參與的體驗。</h2>
-      <div class="home-manifesto-note"><b>Visual × Interaction × Story</b><p>從一張海報、一套角色，到需要兩個人共同完成的互動裝置，我在意的不只是風格，而是觀眾如何進入作品、感受到什麼，最後帶走什麼。</p></div>
-    </section>
-
-    <section class="featured reveal">
+    <section class="featured reveal" id="selected">
       <div class="section-title">
-        <span>Selected Works</span>
-        <a href="works.html">All Works →</a>
+        <span>精選作品</span>
+        <p>SELECTED WORKS / 01–04</p>
       </div>
 
       <div class="featured-grid">
         <a class="project-card large listen-feature" href="works/listen-speak.html">
-          <div class="thumb"><img src="images/listen-speak/showcase-cover.png" alt="聽說 Listen and Speak"></div>
-          <div class="project-info"><span>Interactive Installation / Visual Direction / PM</span><h2>聽說 Listen & Speak</h2><p>將資訊失真、語音辨識與雙人對話轉化為一場關於理解與誤解的沉浸式體驗。</p></div>
+          <div class="thumb"><img src="images/listen-speak/showcase-cover.webp" alt="聽說 Listen and Speak"></div>
+          <div class="project-info"><span>01 / Interactive Installation</span><h2>聽說 Listen & Speak</h2><p>兩個人隔著螢幕說話。系統不斷扭曲訊息，讓「理解」變成一件需要共同完成的事。</p></div>
         </a>
 
         <a class="project-card" href="works/ocean-of-masks.html">
           <div class="thumb">
-            <img src="./images/visual/maskjellyfish.png" alt="Ocean of Masks">
+            <img src="./images/visual/maskjellyfish.webp" alt="Ocean of Masks">
           </div>
           <div class="project-info">
-            <span>02 / Visual Metaphor × Poster</span>
+            <span>02 / Poster</span>
             <h2>Ocean of Masks</h2>
-            <p>以拋棄式口罩轉化為海洋生物，探討塑膠污染對生態的影響。</p>
+            <p>把廢棄口罩變成海中生物。疫情留下的日常物件，也成為另一種污染。</p>
           </div>
         </a>
 
         <a class="project-card" href="works/uiux.html">
           <div class="thumb">
-            <img src="images/invisablemask/cover.jpg" alt="Invisible Mask">
+            <img src="images/invisablemask/cover.webp" alt="Invisible Mask">
           </div>
           <div class="project-info">
-            <span>03 / UX × Future Scenario</span>
+            <span>03 / UX Design</span>
             <h2>Invisible Mask</h2>
-            <p>從使用者研究出發，想像「隑形面膜」技術如何改變化妝、分享與日常決策。</p>
+            <p>想像一種能瞬間完成妝容的技術，並從使用者需求重新設計化妝的流程。</p>
           </div>
         </a>
 
         <a class="project-card" href="works/board-game.html">
           <div class="thumb">
-            <img src="images/boardgame/image01.jpg" alt="Board Game Project">
+            <img src="images/boardgame/image01.webp" alt="Board Game Project">
           </div>
           <div class="project-info">
-            <span>04 / Learning × Play</span>
+            <span>04 / Board Game</span>
             <h2>同人擺攤教學桌遊</h2>
-            <p>以桌遊形式轉譯同人擺攤流程。</p>
+            <p>把第一次同人擺攤會遇到的混亂，做成一套可以先玩過一次的桌遊。</p>
           </div>
         </a>
 
-        <a class="project-card blood-feature" href="works/period.html">
-          <div class="thumb">
-            <img src="images/blood-is-not-a-sin/exhibition-close.png" alt="Blood Is Not a Sin installation">
-          </div>
-          <div class="project-info">
-            <span>05 / Installation × Collective Voice</span>
-            <h2>Blood Is Not a Sin</h2>
-            <p>以衛生棉構成可被訊息投影的女性身體，讓世界各地的聲音共同取代污名與沉默。</p>
-          </div>
-        </a>
+      </div>
+
+      <div class="all-works-cta">
+        <p>還想看更多？</p>
+        <a class="all-works-button" href="works.html"><span>查看更多作品</span><b>ALL WORKS ↗</b></a>
       </div>
     </section>
 <!-- 

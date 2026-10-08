@@ -312,6 +312,38 @@ function addLinkedInLinks() {
 
 addLinkedInLinks();
 
+function addFooterContactLinks() {
+  document.querySelectorAll("footer").forEach((footer) => {
+    if (footer.querySelector(".footer-contact-links")) return;
+
+    const contactText = Array.from(footer.querySelectorAll("span")).find((span) =>
+      span.textContent.includes("snow.0310.52@gmail.com")
+    );
+    if (!contactText) return;
+
+    const links = document.createElement("span");
+    links.className = "footer-contact-links";
+
+    const label = document.createElement("span");
+    label.textContent = "Contact /";
+
+    const instagram = document.createElement("a");
+    instagram.href = "https://www.instagram.com/yuki031.01/";
+    instagram.target = "_blank";
+    instagram.rel = "noopener noreferrer";
+    instagram.textContent = "@yuki031.01 ↗";
+
+    const email = document.createElement("a");
+    email.href = "mailto:snow.0310.52@gmail.com";
+    email.textContent = "snow.0310.52@gmail.com ↗";
+
+    links.append(label, instagram, email);
+    contactText.replaceWith(links);
+  });
+}
+
+addFooterContactLinks();
+
 const workNavGroups = [
   {
     title: "Visual Design",
@@ -443,6 +475,7 @@ function enableWorksDropdownClick() {
     trigger.setAttribute("aria-expanded", "false");
 
     trigger.addEventListener("click", (event) => {
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
       event.preventDefault();
       const willOpen = !dropdown.classList.contains("is-open");
 
@@ -512,15 +545,40 @@ if (cursor) {
   });
 }
 
-document.querySelectorAll("a, button, .project-card, .gallery-item").forEach((item) => {
+document.querySelectorAll("a, button, .gallery-item").forEach((item) => {
+  item.addEventListener("mouseenter", () => cursor?.classList.add("is-link"));
+  item.addEventListener("mouseleave", () => cursor?.classList.remove("is-link"));
+});
+
+document.querySelectorAll(".project-card").forEach((item) => {
   item.addEventListener("mouseenter", () => {
-    if (cursor) cursor.style.transform = "translate(-50%, -50%) scale(2.4)";
+    cursor?.classList.remove("is-link");
+    cursor?.classList.add("is-project");
   });
 
   item.addEventListener("mouseleave", () => {
-    if (cursor) cursor.style.transform = "translate(-50%, -50%) scale(1)";
+    cursor?.classList.remove("is-link", "is-project");
   });
 });
+
+const homeIntro = document.querySelector(".home-intro");
+
+if (homeIntro) {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.body.classList.add("intro-playing");
+
+  const finishIntro = () => {
+    document.body.classList.add("intro-finished");
+    document.body.classList.remove("intro-playing");
+    window.setTimeout(() => homeIntro.remove(), reducedMotion ? 0 : 700);
+  };
+
+  if (reducedMotion) {
+    finishIntro();
+  } else {
+    window.setTimeout(finishIntro, 1450);
+  }
+}
 
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.querySelector(".lightbox-img");
@@ -528,7 +586,7 @@ const closeBtn = document.querySelector(".lightbox-close");
 
 if (lightbox && lightboxImg) {
   const galleryImages = document.querySelectorAll(
-    ".gallery-item img, .project-gallery img, .series-grid img, .project-full img, .project-cover img"
+    ".gallery-item img, .project-gallery img, .series-grid img, .project-full img, .project-cover img, .work-item img, .project-feature img, .photo-grid img, .identity-grid img, .story-grid img, .blood-page main img, .ui-screen-grid img, .listen-identity-grid img"
   );
 
   galleryImages.forEach((img) => {
@@ -552,32 +610,40 @@ if (lightbox && lightboxImg) {
   });
 }
 
+document.querySelectorAll(".animationstudy-page .motion-item video, .animationstudy-page .motion-cover video").forEach((video) => {
+  video.setAttribute("title", "Click to view fullscreen");
+  video.addEventListener("click", () => {
+    if (document.fullscreenElement) return;
+    video.requestFullscreen?.();
+  });
+});
+
 window.addEventListener("DOMContentLoaded", () => {
   const charImages = [
-    "../images/boardgame/character/1.png",
-    "../images/boardgame/character/2.png",
-    "../images/boardgame/character/3.png",
-    "../images/boardgame/character/4.png",
-    "../images/boardgame/character/5.png",
-    "../images/boardgame/character/6.png"
+    "../images/boardgame/character/1.webp",
+    "../images/boardgame/character/2.女性向.webp",
+    "../images/boardgame/character/3.原創.webp",
+    "../images/boardgame/character/4.vtuber.webp",
+    "../images/boardgame/character/5.福瑞.webp",
+    "../images/boardgame/character/6.遊戲.webp"
   ];
 
   const taskImages = [
-    "../images/boardgame/card01/19.png",
-    "../images/boardgame/card01/5.png",
-    "../images/boardgame/card03/5.png",
-    "../images/boardgame/card03/9.png",
-    "../images/boardgame/card04/19.png",
-    "../images/boardgame/card04/9.png"
+    "../images/boardgame/card01/19.webp",
+    "../images/boardgame/card01/5.webp",
+    "../images/boardgame/card03/5.webp",
+    "../images/boardgame/card03/9.webp",
+    "../images/boardgame/card04/19.webp",
+    "../images/boardgame/card04/9.webp"
   ];
 
   const eventImages = [
-    "../images/boardgame/card02/B19.png",
-    "../images/boardgame/card02/B27.png",
-    "../images/boardgame/card02/B30.png",
-    "../images/boardgame/card02/B25.png",
-    "../images/boardgame/card02/B5.png",
-    "../images/boardgame/card02/B31.png"
+    "../images/boardgame/card02/B19.webp",
+    "../images/boardgame/card02/B27.webp",
+    "../images/boardgame/card02/B30.webp",
+    "../images/boardgame/card02/B25.webp",
+    "../images/boardgame/card02/B5.webp",
+    "../images/boardgame/card02/B31.webp"
   ];
 
   const charImg = document.getElementById("charImg");
@@ -611,8 +677,15 @@ window.addEventListener("DOMContentLoaded", () => {
   if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
+  const isHome = document.body.classList.contains("home-page");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const particles = [];
-  const count = 80;
+  const colors = [
+    [255, 92, 158],
+    [118, 103, 255],
+    [217, 255, 67]
+  ];
+  const count = isHome ? 14 : 80;
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -623,32 +696,58 @@ window.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", resize);
 
   for (let i = 0; i < count; i += 1) {
+    const color = colors[i % colors.length];
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 3 + 1,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4
+      size: isHome ? Math.random() * 130 + 70 : Math.random() * 3 + 1,
+      vx: isHome ? (Math.random() - 0.5) * 0.22 : (Math.random() - 0.5) * 0.4,
+      vy: isHome ? (Math.random() - 0.5) * 0.18 : (Math.random() - 0.5) * 0.4,
+      color,
+      phase: Math.random() * Math.PI * 2
     });
   }
 
-  function draw() {
+  function draw(time = 0) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach((particle) => {
-      particle.x += particle.vx;
-      particle.y += particle.vy;
+      if (!reduceMotion) {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+      }
 
-      if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-      if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
+      const margin = isHome ? particle.size : 0;
+      if (particle.x < -margin || particle.x > canvas.width + margin) particle.vx *= -1;
+      if (particle.y < -margin || particle.y > canvas.height + margin) particle.vy *= -1;
 
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0,0,0,0.15)";
-      ctx.fill();
+      if (isHome) {
+        const pulse = reduceMotion ? 1 : 1 + Math.sin(time * 0.00035 + particle.phase) * 0.09;
+        const radius = particle.size * pulse;
+        const gradient = ctx.createRadialGradient(
+          particle.x,
+          particle.y,
+          0,
+          particle.x,
+          particle.y,
+          radius
+        );
+        gradient.addColorStop(0, `rgba(${particle.color.join(",")},0.16)`);
+        gradient.addColorStop(0.55, `rgba(${particle.color.join(",")},0.06)`);
+        gradient.addColorStop(1, `rgba(${particle.color.join(",")},0)`);
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, radius, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      } else {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(0,0,0,0.15)";
+        ctx.fill();
+      }
     });
 
-    requestAnimationFrame(draw);
+    if (!reduceMotion) requestAnimationFrame(draw);
   }
 
   draw();

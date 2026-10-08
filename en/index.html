@@ -6,7 +6,7 @@
   <title>YU Portfolio / English</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
-<body>
+<body class="home-page">
   <canvas id="bg-particles"></canvas>
   <div class="cursor-dot"></div>
 
@@ -60,39 +60,24 @@
   </header>
 
   <main>
-    <section class="hero page-enter">
-      <div class="hero-copy">
-        <div class="hero-kicker">Concept-driven cross-media designer</div>
-        <h1>Yuki<br><span>Chou</span></h1>
-        <p>I begin with how people understand, operate, and participate, then translate abstract questions into visible experiences across visual, interactive, and spatial media.</p>
+    <section class="hero home-hero page-enter">
+      <div class="home-hero-top"><span>PORTFOLIO / 2026</span><span>VISUAL · INTERACTION · PLAY</span></div>
+      <div class="home-texture-field" aria-hidden="true"><span>QUESTION<br>THE<br>DEFAULT</span></div>
+      <h1 class="home-name"><span>YUKI</span><span>CHOU</span></h1>
+      <div class="home-hero-statement">
+        <p class="hero-belief">I don't believe things have to stay the way they are.</p>
+        <p class="hero-intro">I start with how people feel and act, take familiar rules apart, then rebuild them through images, interaction, or play.</p>
         <div class="hero-actions">
-          <a class="button primary" href="works.html">View Works</a>
-          <a class="button" href="about.html">About Me</a>
+          <a class="button primary" href="#selected">Selected Works</a>
+          <a class="button" href="works.html">All Works</a>
         </div>
       </div>
-      <div class="hero-showcase" aria-label="Selected projects">
-        <a class="hero-work hero-work-main" href="works/listen-speak.html">
-          <img src="../images/listen-speak/experience.png" alt="Listen and Speak">
-          <span><b>Listen & Speak</b><small>Interactive / 2025</small></span>
-        </a>
-        <a class="hero-work" href="works/uiux.html">
-          <img src="../images/invisablemask/cover.jpg" alt="Invisible Mask">
-          <span><b>Invisible Mask</b><small>UX / Future Scenario</small></span>
-        </a>
-        <a class="hero-work" href="works/ocean-of-masks.html">
-          <img src="../images/visual/maskjellyfish.png" alt="Ocean of Masks">
-          <span><b>Ocean of Masks</b><small>Poster</small></span>
-        </a>
-      </div>
+      <div class="home-side-note" aria-hidden="true">NO FIXED ANSWER ↘</div>
     </section>
 
-    <section class="home-manifesto reveal">
-      <span>How I work</span>
-      <h2>I turn abstract questions into experiences that can be seen, understood, and entered.</h2>
-      <div class="home-manifesto-note"><b>Visual × Interaction × Story</b><p>From a poster or character system to a two-person installation, I care not only about style but also about how an audience enters a work, what they feel, and what stays with them.</p></div>
-    </section>
+    <div class="home-marquee" aria-hidden="true"><div>ASK WHY FIRST  ✶  BREAK THE PATTERN  ✶  MAKE IT FELT  ✶  ASK WHY FIRST  ✶  BREAK THE PATTERN  ✶  MAKE IT FELT  ✶ </div></div>
 
-    <section class="featured reveal">
+    <section class="featured reveal" id="selected">
       <div class="section-title">
         <span>Selected Works</span>
         <a href="works.html">All Works</a>
@@ -100,51 +85,51 @@
 
       <div class="featured-grid">
         <a class="project-card large listen-feature" href="works/listen-speak.html">
-          <div class="thumb"><img src="../images/listen-speak/showcase-cover.png" alt="Listen and Speak"></div>
-          <div class="project-info"><span>Interactive Installation / Visual Direction / PM</span><h2>Listen & Speak</h2><p>An immersive two-person experience about understanding, misunderstanding, and the distortion of information.</p></div>
+          <div class="thumb"><img src="../images/listen-speak/showcase-cover.webp" alt="Listen and Speak"></div>
+          <div class="project-info"><span>01 / Interactive Installation</span><h2>Listen & Speak</h2><p>Two people speak through a screen while the system keeps distorting their messages. Understanding becomes something they must build together.</p></div>
         </a>
 
         <a class="project-card" href="works/ocean-of-masks.html">
           <div class="thumb">
-            <img src="../images/visual/maskjellyfish.png" alt="Ocean of Masks">
+            <img src="../images/visual/maskjellyfish.webp" alt="Ocean of Masks">
           </div>
           <div class="project-info">
-            <span>02 / Visual Metaphor × Poster</span>
+            <span>02 / Poster</span>
             <h2>Ocean of Masks</h2>
-            <p>A poster series that transforms disposable masks into marine life, reflecting on plastic pollution and ecological harm.</p>
+            <p>Discarded masks become marine creatures. An everyday object left by the pandemic becomes another form of pollution.</p>
           </div>
         </a>
 
         <a class="project-card" href="works/uiux.html">
           <div class="thumb">
-            <img src="../images/invisablemask/cover.jpg" alt="Invisible Mask">
+            <img src="../images/invisablemask/cover.webp" alt="Invisible Mask">
           </div>
           <div class="project-info">
-            <span>03 / UX × Future Scenario</span>
+            <span>03 / UX Design</span>
             <h2>Invisible Mask</h2>
-            <p>A user-research-led exploration of how invisible-mask technology could reshape makeup, sharing, and everyday decisions.</p>
+            <p>A future technology that applies makeup instantly, designed from the needs and decisions of the people who might use it.</p>
           </div>
         </a>
 
         <a class="project-card" href="works/board-game.html">
           <div class="thumb">
-            <img src="../images/boardgame/image01.jpg" alt="Board Game Project">
+            <img src="../images/boardgame/image01.webp" alt="Board Game Project">
           </div>
           <div class="project-info">
-            <span>04 / Learning × Play</span>
+            <span>04 / Board Game</span>
             <h2>Doujin Booth Teaching Board Game</h2>
-            <p>An educational board game that translates the process of running a fan-market booth into play.</p>
+            <p>The chaos of a first doujin booth turned into a board game you can experience before doing it for real.</p>
           </div>
         </a>
 
         <a class="project-card blood-feature" href="works/period.html">
           <div class="thumb">
-            <img src="../images/blood-is-not-a-sin/exhibition-close.png" alt="Blood Is Not a Sin installation">
+            <img src="../images/blood-is-not-a-sin/exhibition-close.webp" alt="Blood Is Not a Sin installation">
           </div>
           <div class="project-info">
-            <span>05 / Installation × Collective Voice</span>
+            <span>05 / Interactive Installation</span>
             <h2>Blood Is Not a Sin</h2>
-            <p>A sanitary-pad installation and multilingual voice platform that replaces menstrual stigma and silence with collective testimony.</p>
+            <p>A monumental body made of sanitary pads. Visitors' words are translated and projected, replacing stigma one sentence at a time.</p>
           </div>
         </a>
       </div>
